@@ -15,7 +15,7 @@ export const preloadImages = (urls: string[]): Promise<HTMLImageElement[]> => {
 };
 
 export const jobBaseNameToUrl = (baseName: string): string => {
-  return `/jobs/${baseName}.png`;
+  return `./jobs/${baseName}.png`;
 }
 
 /**

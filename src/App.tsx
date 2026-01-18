@@ -276,7 +276,7 @@ const ImageEditor: React.FC = () => {
           count === 2 ? DESIGN_HEIGHT - 220 - 150 : DESIGN_HEIGHT - 930 - 150;
         const img = addImageToCanvas(
           fabricCanvas.current!,
-          imageCache[`/jobs/${picName}.png`],
+          imageCache[`./jobs/${picName}.png`],
           isVertical ? DESIGN_WIDTH / 2 : DESIGN_HEIGHT / 2,
           isVertical ? y : DESIGN_HEIGHT / 2,
         );
