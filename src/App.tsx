@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Canvas, Polyline } from "fabric";
+import { Canvas, FabricImage, Polyline } from "fabric";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 import {
   Button,
   Card,
   Checkbox,
   CheckboxChangeEvent,
   Flex,
+  Modal,
+  Popconfirm,
   Typography,
 } from "antd";
+const { confirm } = Modal;
 const { Text } = Typography;
 import { Sticker } from "./interface";
 import jobsJson from "./assets/jobs_file_name.json";
@@ -281,6 +285,17 @@ const ImageEditor: React.FC = () => {
     canvas.renderAll();
   };
 
+  const handleClearCanvas = () => {
+    const canvas = fabricCanvas.current;
+    if (!canvas) return;
+    const images = canvas
+      .getObjects()
+      .filter((obj) => obj instanceof FabricImage);
+
+    canvas.remove(...images);
+    canvas.renderAll();
+  };
+
   /**
    * 导出图片
    * @returns
@@ -374,6 +389,18 @@ const ImageEditor: React.FC = () => {
           <Checkbox checked={isVertical} onChange={handleSetVertical}>
             {"竖屏模式"}
           </Checkbox>
+          <Popconfirm
+            title="是否清空画布"
+            description="将删除当前所有内容"
+            onConfirm={handleClearCanvas}
+            onCancel={() => {}}
+            okText="确认"
+            okType="danger"
+            cancelText="取消"
+          >
+            <Button>清空画布</Button>
+          </Popconfirm>
+
           <Button type="primary" onClick={handleExport}>
             保存图片
           </Button>

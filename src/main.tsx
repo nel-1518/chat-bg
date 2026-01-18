@@ -10,6 +10,7 @@ createRoot(document.getElementById("root")!).render(
     theme={{
       token: {
         colorPrimary: "#9bb382",
+        colorError: "#b66363",
         borderRadius: 8,
       },
     }}
