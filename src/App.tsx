@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Canvas, FabricImage, Polyline } from "fabric";
-import { ExclamationCircleFilled } from "@ant-design/icons";
 import {
   Button,
   Card,
   Checkbox,
   CheckboxChangeEvent,
   Flex,
-  Modal,
   Popconfirm,
   Typography,
 } from "antd";
-const { confirm } = Modal;
 const { Text } = Typography;
 import { Sticker } from "./interface";
 import jobsJson from "./assets/jobs_file_name.json";
@@ -285,6 +282,9 @@ const ImageEditor: React.FC = () => {
     canvas.renderAll();
   };
 
+  /**
+   * 清空画布，遍历 canvas 中的对象，移除 FabricImage
+   */
   const handleClearCanvas = () => {
     const canvas = fabricCanvas.current;
     if (!canvas) return;
