@@ -251,7 +251,6 @@ const ImageEditor: React.FC = () => {
    * @param options 职业列表
    */
   const handleSelectJobs = (options: string[]) => {
-    console.log(`options:${options}`);
     // 如果什么都没选，清空画布
     if (options.length === 0) {
       images.forEach(({ image }) => {
@@ -289,7 +288,6 @@ const ImageEditor: React.FC = () => {
     });
 
     // 判断当前显示的图片是否有被选中，如果没有选中，则删除
-    console.log(images);
     const result = imgs.filter((v) => {
       if (!options.includes(v.tag)) {
         removeImageFromCanvas(fabricCanvas.current, v.image);
@@ -426,6 +424,7 @@ const ImageEditor: React.FC = () => {
             disabled={loading}
             mode="multiple"
             allowClear
+            placement="bottomLeft"
             onChange={handleSelectJobs}
             options={selectOptions}
           />
