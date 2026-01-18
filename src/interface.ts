@@ -7,12 +7,6 @@ export interface Sticker {
   fileIndex: number,
 }
 
-export interface Job {
-  name: string,
-  class: string,
-  baseNames: string[]
-}
-
 export interface TreeNode {
   value: string;
   title: string;

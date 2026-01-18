@@ -92,9 +92,3 @@ export const addImageToCanvas = async (
   canvas.renderAll();
   return img;
 };
-
-export const removeImageFromCanvas = async (canvas: Canvas | null, image: FabricImage) => {
-  if (!canvas) return;
-  canvas.remove(image);
-  canvas.renderAll();
-};
