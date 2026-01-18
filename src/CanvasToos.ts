@@ -21,23 +21,24 @@ export const jobBaseNameToUrl = (baseName: string): string => {
 /**
  * 导入图片到指定位置
  */
-export const addImageToCanvas = (
+export const addImageToCanvas = async (
   canvas: Canvas,
-  imageElement: HTMLImageElement,
+  url: string,
   left: number,
   top: number,
-): FabricImage => {
+): Promise<FabricImage> => {
 
   const imgElement = document.createElement('img');
   imgElement.src = "./delete.png";
-
-  const img = new FabricImage(imageElement, {
+  const img = await FabricImage.fromURL(url, { crossOrigin: 'anonymous' }, {
     controls: {
       ...FabricImage.createControls().controls,
       mySpecialControl: new Control({
         x: 0,
         y: 0.5,
         cursorStyle: "pointer",
+        sizeX: 25,
+        sizeY: 25,
         mouseUpHandler: (e, trans) => {
           canvas.remove(trans.target);
           canvas.requestRenderAll();
@@ -74,7 +75,6 @@ export const addImageToCanvas = (
     bl: true,
     br: true,
   });
-
 
   img.set({
     perPixelTargetFind: true,

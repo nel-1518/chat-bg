@@ -1,116 +1,386 @@
 [
   {
-    "name": "占星术士",
-    "class": "治疗职业",
-    "baseNames": [
-      "占星术士1",
-      "占星术士2"
-    ]
+    "fileName": "Yan1.png",
+    "coverFileName": "问号.png",
+    "jobName": "Yan",
+    "jobIndex": 25,
+    "fileIndex": 1,
+    "className": "其他"
   },
   {
-    "name": "召唤师",
-    "class": "远程魔法职业",
-    "baseNames": [
-      "召唤师1",
-      "召唤师2"
-    ]
+    "fileName": "占星术士1.png",
+    "coverFileName": "占星术士1.png",
+    "jobName": "占星术士",
+    "jobIndex": 6,
+    "fileIndex": 1,
+    "className": "治疗职业"
   },
   {
-    "name": "学者",
-    "class": "治疗职业",
-    "baseNames": [
-      "学者1",
-      "学者2"
-    ]
+    "fileName": "占星术士2.png",
+    "coverFileName": "占星术士2.png",
+    "jobName": "占星术士",
+    "jobIndex": 6,
+    "fileIndex": 2,
+    "className": "治疗职业"
   },
   {
-    "name": "战士",
-    "class": "防护职业",
-    "baseNames": [
-      "战士1",
-      "战士2"
-    ]
+    "fileName": "召唤师1.png",
+    "coverFileName": "召唤师1.png",
+    "jobName": "召唤师",
+    "jobIndex": 18,
+    "fileIndex": 1,
+    "className": "远程职业"
   },
   {
-    "name": "捕鱼人",
-    "class": "大地使者",
-    "baseNames": [
-      "捕鱼人1",
-      "捕鱼人2"
-    ]
+    "fileName": "召唤师2.png",
+    "coverFileName": "召唤师2.png",
+    "jobName": "召唤师",
+    "jobIndex": 18,
+    "fileIndex": 2,
+    "className": "远程职业"
   },
   {
-    "name": "暗黑骑士",
-    "class": "防护职业",
-    "baseNames": [
-      "暗黑骑士1",
-      "暗黑骑士2"
-    ]
+    "fileName": "吟游诗人1.png",
+    "coverFileName": "吟游诗人1.png",
+    "jobName": "吟游诗人",
+    "jobIndex": 14,
+    "fileIndex": 1,
+    "className": "远程职业"
   },
   {
-    "name": "机工士",
-    "class": "远程物理职业",
-    "baseNames": [
-      "机工士1",
-      "机工士2"
-    ]
+    "fileName": "吟游诗人2.png",
+    "coverFileName": "吟游诗人2.png",
+    "jobName": "吟游诗人",
+    "jobIndex": 14,
+    "fileIndex": 2,
+    "className": "远程职业"
   },
   {
-    "name": "白魔法师",
-    "class": "治疗职业",
-    "baseNames": [
-      "白魔法师1",
-      "白魔法师2"
-    ]
+    "fileName": "大河狸1.png",
+    "coverFileName": "问号.png",
+    "jobName": "大河狸",
+    "jobIndex": 23,
+    "fileIndex": 1,
+    "className": "其他"
   },
   {
-    "name": "绘灵法师",
-    "class": "远程魔法职业",
-    "baseNames": [
-      "绘灵法师1",
-      "绘灵法师2"
-    ]
+    "fileName": "学者1.png",
+    "coverFileName": "学者1.png",
+    "jobName": "学者",
+    "jobIndex": 5,
+    "fileIndex": 1,
+    "className": "治疗职业"
   },
   {
-    "name": "绝枪战士",
-    "class": "防护职业",
-    "baseNames": [
-      "绝枪战士1",
-      "绝枪战士2"
-    ]
+    "fileName": "学者2.png",
+    "coverFileName": "学者2.png",
+    "jobName": "学者",
+    "jobIndex": 5,
+    "fileIndex": 2,
+    "className": "治疗职业"
   },
   {
-    "name": "赤魔法师",
-    "class": "远程魔法职业",
-    "baseNames": [
-      "赤魔法师1",
-      "赤魔法师2"
-    ]
+    "fileName": "忍者1.png",
+    "coverFileName": "忍者1.png",
+    "jobName": "忍者",
+    "jobIndex": 10,
+    "fileIndex": 1,
+    "className": "近战职业"
   },
   {
-    "name": "骑士",
-    "class": "防护职业",
-    "baseNames": [
-      "骑士1",
-      "骑士2",
-      "骑士3"
-    ]
+    "fileName": "忍者2.png",
+    "coverFileName": "忍者2.png",
+    "jobName": "忍者",
+    "jobIndex": 10,
+    "fileIndex": 2,
+    "className": "近战职业"
   },
   {
-    "name": "黑魔法师",
-    "class": "远程魔法职业",
-    "baseNames": [
-      "黑魔法师1",
-      "黑魔法师2"
-    ]
+    "fileName": "战士1.png",
+    "coverFileName": "战士1.png",
+    "jobName": "战士",
+    "jobIndex": 1,
+    "fileIndex": 1,
+    "className": "防护职业"
   },
   {
-    "name": "龙骑士",
-    "class": "近战职业",
-    "baseNames": [
-      "龙骑士1",
-      "龙骑士2",
-      "龙骑士3"
-    ]
+    "fileName": "战士2.png",
+    "coverFileName": "战士2.png",
+    "jobName": "战士",
+    "jobIndex": 1,
+    "fileIndex": 2,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "捕鱼人1.png",
+    "coverFileName": "捕鱼人1.png",
+    "jobName": "捕鱼人",
+    "jobIndex": 22,
+    "fileIndex": 1,
+    "className": "其他"
+  },
+  {
+    "fileName": "捕鱼人2.png",
+    "coverFileName": "捕鱼人2.png",
+    "jobName": "捕鱼人",
+    "jobIndex": 22,
+    "fileIndex": 2,
+    "className": "其他"
+  },
+  {
+    "fileName": "暗黑骑士1.png",
+    "coverFileName": "暗黑骑士1.png",
+    "jobName": "暗黑骑士",
+    "jobIndex": 2,
+    "fileIndex": 1,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "暗黑骑士2.png",
+    "coverFileName": "暗黑骑士2.png",
+    "jobName": "暗黑骑士",
+    "jobIndex": 2,
+    "fileIndex": 2,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "机工士1.png",
+    "coverFileName": "机工士1.png",
+    "jobName": "机工士",
+    "jobIndex": 15,
+    "fileIndex": 1,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "机工士2.png",
+    "coverFileName": "机工士2.png",
+    "jobName": "机工士",
+    "jobIndex": 15,
+    "fileIndex": 2,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "武僧1.png",
+    "coverFileName": "武僧1.png",
+    "jobName": "武僧",
+    "jobIndex": 8,
+    "fileIndex": 1,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "武僧2.png",
+    "coverFileName": "武僧2.png",
+    "jobName": "武僧",
+    "jobIndex": 8,
+    "fileIndex": 2,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "死刑点名1.png",
+    "coverFileName": "问号.png",
+    "jobName": "死刑点名",
+    "jobIndex": 24,
+    "fileIndex": 1,
+    "className": "其他"
+  },
+  {
+    "fileName": "白魔法师1.png",
+    "coverFileName": "白魔法师1.png",
+    "jobName": "白魔法师",
+    "jobIndex": 4,
+    "fileIndex": 1,
+    "className": "治疗职业"
+  },
+  {
+    "fileName": "白魔法师2.png",
+    "coverFileName": "白魔法师2.png",
+    "jobName": "白魔法师",
+    "jobIndex": 4,
+    "fileIndex": 2,
+    "className": "治疗职业"
+  },
+  {
+    "fileName": "绘灵法师1.png",
+    "coverFileName": "绘灵法师1.png",
+    "jobName": "绘灵法师",
+    "jobIndex": 20,
+    "fileIndex": 1,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "绘灵法师2.png",
+    "coverFileName": "绘灵法师2.png",
+    "jobName": "绘灵法师",
+    "jobIndex": 20,
+    "fileIndex": 2,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "绝枪战士1.png",
+    "coverFileName": "绝枪战士1.png",
+    "jobName": "绝枪战士",
+    "jobIndex": 3,
+    "fileIndex": 1,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "绝枪战士2.png",
+    "coverFileName": "绝枪战士2.png",
+    "jobName": "绝枪战士",
+    "jobIndex": 3,
+    "fileIndex": 2,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "舞者1.png",
+    "coverFileName": "舞者1.png",
+    "jobName": "舞者",
+    "jobIndex": 16,
+    "fileIndex": 1,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "舞者2.png",
+    "coverFileName": "舞者2.png",
+    "jobName": "舞者",
+    "jobIndex": 16,
+    "fileIndex": 2,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "贤者1.png",
+    "coverFileName": "贤者1.png",
+    "jobName": "贤者",
+    "jobIndex": 7,
+    "fileIndex": 1,
+    "className": "治疗职业"
+  },
+  {
+    "fileName": "贤者2.png",
+    "coverFileName": "贤者2.png",
+    "jobName": "贤者",
+    "jobIndex": 7,
+    "fileIndex": 2,
+    "className": "治疗职业"
+  },
+  {
+    "fileName": "赤魔法师1.png",
+    "coverFileName": "赤魔法师1.png",
+    "jobName": "赤魔法师",
+    "jobIndex": 19,
+    "fileIndex": 1,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "赤魔法师2.png",
+    "coverFileName": "赤魔法师2.png",
+    "jobName": "赤魔法师",
+    "jobIndex": 19,
+    "fileIndex": 2,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "钐镰客1.png",
+    "coverFileName": "钐镰客1.png",
+    "jobName": "钐镰客",
+    "jobIndex": 12,
+    "fileIndex": 1,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "钐镰客2.png",
+    "coverFileName": "钐镰客2.png",
+    "jobName": "钐镰客",
+    "jobIndex": 12,
+    "fileIndex": 2,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "青魔法师1.png",
+    "coverFileName": "青魔法师1.png",
+    "jobName": "青魔法师",
+    "jobIndex": 21,
+    "fileIndex": 1,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "青魔法师2.png",
+    "coverFileName": "青魔法师2.png",
+    "jobName": "青魔法师",
+    "jobIndex": 21,
+    "fileIndex": 2,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "骑士1.png",
+    "coverFileName": "骑士1.png",
+    "jobName": "骑士",
+    "jobIndex": 0,
+    "fileIndex": 1,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "骑士2.png",
+    "coverFileName": "骑士2.png",
+    "jobName": "骑士",
+    "jobIndex": 0,
+    "fileIndex": 2,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "骑士3.png",
+    "coverFileName": "骑士3.png",
+    "jobName": "骑士",
+    "jobIndex": 0,
+    "fileIndex": 3,
+    "className": "防护职业"
+  },
+  {
+    "fileName": "黑魔法师1.png",
+    "coverFileName": "黑魔法师1.png",
+    "jobName": "黑魔法师",
+    "jobIndex": 17,
+    "fileIndex": 1,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "黑魔法师2.png",
+    "coverFileName": "黑魔法师2.png",
+    "jobName": "黑魔法师",
+    "jobIndex": 17,
+    "fileIndex": 2,
+    "className": "远程职业"
+  },
+  {
+    "fileName": "龙骑士1.png",
+    "coverFileName": "龙骑士1.png",
+    "jobName": "龙骑士",
+    "jobIndex": 9,
+    "fileIndex": 1,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "龙骑士2.png",
+    "coverFileName": "龙骑士2.png",
+    "jobName": "龙骑士",
+    "jobIndex": 9,
+    "fileIndex": 2,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "龙骑士3.png",
+    "coverFileName": "龙骑士3.png",
+    "jobName": "龙骑士",
+    "jobIndex": 9,
+    "fileIndex": 3,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "龙骑士4.png",
+    "coverFileName": "龙骑士4.png",
+    "jobName": "龙骑士",
+    "jobIndex": 9,
+    "fileIndex": 4,
+    "className": "近战职业"
   }
 ]

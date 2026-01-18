@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FabricImage, Canvas, FabricText, Polyline } from "fabric";
 import {
   Button,
+  Card,
   Checkbox,
   CheckboxChangeEvent,
   Flex,
@@ -9,14 +10,13 @@ import {
   Typography,
 } from "antd";
 const { Text } = Typography;
-import { Job, Option, OptionGroup } from "./interface";
-import jobsFileNameJson from "./assets/jobs_file_name.json";
+import { Option, OptionGroup, Sticker } from "./interface";
+import jobsJson from "./assets/jobs_file_name.json";
 import "./App.css";
 import {
   addImageToCanvas,
   jobBaseNameToUrl,
   preloadImages,
-  removeImageFromCanvas,
 } from "./CanvasToos";
 
 interface ImageTag {
@@ -33,7 +33,9 @@ const BG_LIGHT = "#ededed";
 const BG_DARK = "#202020";
 const LINE_GRAY = "#888888";
 
-const jobFiles = jobsFileNameJson as Job[];
+// const jobFiles = jobsFileNameJson as Job[];
+const stickers = jobsJson as Sticker[];
+
 let scale = 1;
 
 const ImageEditor: React.FC = () => {
@@ -51,6 +53,7 @@ const ImageEditor: React.FC = () => {
   const fabricCanvas = useRef<Canvas | null>(null);
 
   const [images, setImages] = useState<ImageTag[]>([]);
+  const [stickerOptions, setStickerOptions] = useState<Sticker[]>([]);
 
   const [isVertical, setVertical] = useState<boolean>(true);
   const [isShowGrid, setShowGrid] = useState<boolean>(false);
@@ -65,14 +68,6 @@ const ImageEditor: React.FC = () => {
      */
     const optGroupArr: OptionGroup[] = [];
     const jobMap = new Map<string, string[]>();
-
-    jobFiles.forEach((job) => {
-      if (jobMap.has(job.class)) {
-        jobMap.get(job.class)?.push(...job.baseNames);
-      } else {
-        jobMap.set(job.class, job.baseNames);
-      }
-    });
 
     for (const className of jobMap.keys()) {
       const optionGroup: OptionGroup = {
@@ -90,6 +85,15 @@ const ImageEditor: React.FC = () => {
     }
 
     setSelectOptions(optGroupArr);
+
+    const opts = stickers
+      .filter((s) => s.className === tabListNoTitle[0].key)
+      .sort((a, b) =>
+        a.jobIndex === b.jobIndex
+          ? a.fileIndex - b.fileIndex
+          : a.jobIndex - b.jobIndex,
+      );
+    setStickerOptions(opts);
 
     /**
      * 初始化画布
@@ -252,56 +256,51 @@ const ImageEditor: React.FC = () => {
    */
   const handleSelectJobs = (options: string[]) => {
     // 如果什么都没选，清空画布
-    if (options.length === 0) {
-      images.forEach(({ image }) => {
-        fabricCanvas.current?.remove(image);
-      });
-      fabricCanvas.current?.renderAll();
-      setImages([]);
-      return;
-    }
-
-    // 判断当前选择图片是否已显示，如果没显示，则添加
-    const imgs: ImageTag[] = [...images];
-    options.forEach((picName) => {
-      let findInCanvas = false;
-      images.forEach((v) => {
-        if (v.tag === picName) {
-          findInCanvas = true;
-        }
-      });
-      if (!findInCanvas) {
-        const count = Number(picName.slice(-1));
-        const y =
-          count === 2 ? DESIGN_HEIGHT - 220 - 150 : DESIGN_HEIGHT - 930 - 150;
-        const img = addImageToCanvas(
-          fabricCanvas.current!,
-          imageCache[`./jobs/${picName}.png`],
-          isVertical ? DESIGN_WIDTH / 2 : DESIGN_HEIGHT / 2,
-          isVertical ? y : DESIGN_HEIGHT / 2,
-        );
-        imgs.push({
-          image: img,
-          tag: picName,
-        } as ImageTag);
-      }
-    });
-
-    // 判断当前显示的图片是否有被选中，如果没有选中，则删除
-    const result = imgs.filter((v) => {
-      if (!options.includes(v.tag)) {
-        removeImageFromCanvas(fabricCanvas.current, v.image);
-
-        return false;
-      } else {
-        return true;
-      }
-    });
-
-    setImages(result);
+    // if (options.length === 0) {
+    //   images.forEach(({ image }) => {
+    //     fabricCanvas.current?.remove(image);
+    //   });
+    //   fabricCanvas.current?.renderAll();
+    //   setImages([]);
+    //   return;
+    // }
+    // // 判断当前选择图片是否已显示，如果没显示，则添加
+    // const imgs: ImageTag[] = [...images];
+    // options.forEach((picName) => {
+    //   let findInCanvas = false;
+    //   images.forEach((v) => {
+    //     if (v.tag === picName) {
+    //       findInCanvas = true;
+    //     }
+    //   });
+    //   if (!findInCanvas) {
+    //     const count = Number(picName.slice(-1));
+    //     const y =
+    //       count === 2 ? DESIGN_HEIGHT - 220 - 150 : DESIGN_HEIGHT - 930 - 150;
+    //     const img = addImageToCanvas(
+    //       fabricCanvas.current!,
+    //       imageCache[`./jobs/${picName}.png`],
+    //       isVertical ? DESIGN_WIDTH / 2 : DESIGN_HEIGHT / 2,
+    //       isVertical ? y : DESIGN_HEIGHT / 2,
+    //     );
+    //     imgs.push({
+    //       image: img,
+    //       tag: picName,
+    //     } as ImageTag);
+    //   }
+    // });
+    // // 判断当前显示的图片是否有被选中，如果没有选中，则删除
+    // const result = imgs.filter((v) => {
+    //   if (!options.includes(v.tag)) {
+    //     removeImageFromCanvas(fabricCanvas.current, v.image);
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // });
+    // setImages(result);
   };
 
-  //
   /**
    * 切换暗色模式
    * @param e checkbox事件
@@ -391,6 +390,56 @@ const ImageEditor: React.FC = () => {
     }
     canvas.renderAll();
   };
+  const tabListNoTitle = [
+    {
+      key: "防护职业",
+      label: "防护职业",
+    },
+    {
+      key: "治疗职业",
+      label: "治疗职业",
+    },
+    {
+      key: "近战职业",
+      label: "近战职业",
+    },
+    {
+      key: "远程职业",
+      label: "远程职业",
+    },
+    {
+      key: "其他",
+      label: "其他",
+    },
+  ];
+
+  const [activeTabKey, setActiveTabKey] = useState<string>(
+    tabListNoTitle[0].key,
+  );
+
+  const onTabChange = (key: string) => {
+    setActiveTabKey(key);
+    const opts = stickers
+      .filter((s) => s.className === key)
+      .sort((a, b) =>
+        a.jobIndex === b.jobIndex
+          ? a.fileIndex - b.fileIndex
+          : a.jobIndex - b.jobIndex,
+      );
+    setStickerOptions(opts);
+  };
+  const handleOnStickerClick = (e: HTMLImageElement, sticker: Sticker) => {
+    const y =
+      sticker.fileIndex === 2
+        ? DESIGN_HEIGHT - 220 - 150
+        : DESIGN_HEIGHT - 930 - 150;
+    addImageToCanvas(
+      fabricCanvas.current!,
+      `./jobs/${sticker.fileName}`,
+      isVertical ? DESIGN_WIDTH / 2 : DESIGN_HEIGHT / 2,
+      isVertical ? y : DESIGN_HEIGHT / 2,
+    );
+  };
 
   return (
     <div className="container" style={{ width: "100%" }}>
@@ -415,11 +464,11 @@ const ImageEditor: React.FC = () => {
         justify="flex-start"
         vertical
         style={{
-          width: "300px",
+          width: "500px",
         }}
       >
         <Flex justify="flex-start" gap="middle" vertical>
-          <Select
+          {/* <Select
             showSearch={false}
             disabled={loading}
             mode="multiple"
@@ -427,7 +476,28 @@ const ImageEditor: React.FC = () => {
             placement="bottomLeft"
             onChange={handleSelectJobs}
             options={selectOptions}
-          />
+          /> */}
+          <Card
+            tabList={tabListNoTitle}
+            activeTabKey={activeTabKey}
+            onTabChange={onTabChange}
+            style={{ textAlign: "start" }}
+            tabProps={{
+              size: "small",
+            }}
+          >
+            {stickerOptions.map((v) => (
+              <img
+                className="sticker"
+                key={`${v.jobIndex}-${v.fileIndex}`}
+                draggable={false}
+                src={`./jobs/${v.coverFileName}`}
+                onClick={(e) => {
+                  handleOnStickerClick(e.currentTarget, v);
+                }}
+              />
+            ))}
+          </Card>
           <Checkbox checked={isShowGrid} onChange={handleSetGrid}>
             {"显示参考网格"}
           </Checkbox>

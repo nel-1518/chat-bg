@@ -1,3 +1,12 @@
+export interface Sticker {
+  fileName: string,
+  coverFileName: string,
+  jobName: string,
+  className: string,
+  jobIndex: number,
+  fileIndex: number,
+}
+
 export interface Job {
   name: string,
   class: string,
