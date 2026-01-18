@@ -25,12 +25,12 @@ interface ImageTag {
 }
 
 // 预设参数
-const DESIGN_WIDTH = 920;
-const DESIGN_HEIGHT = 1970;
-const GRID_SIZE = 80;
+const DESIGN_WIDTH = 900;
+const DESIGN_HEIGHT = 1920;
+const GRID_SIZE = 60;
 
 const BG_LIGHT = "#ededed";
-const BG_DARK = "#151515";
+const BG_DARK = "#202020";
 const LINE_GRAY = "#888888";
 
 const jobFiles = jobsFileNameJson as Job[];
@@ -173,7 +173,7 @@ const ImageEditor: React.FC = () => {
       hoverCursor: "default",
       visible: false,
     };
-    // 用于参考竖屏底部的线
+    // 用于参考竖屏下面的线
     const verticalBottomLine = new Polyline(
       [
         { x: 0, y: DESIGN_HEIGHT - 220 },
@@ -186,12 +186,13 @@ const ImageEditor: React.FC = () => {
     );
     canvas.add(verticalBottomLine);
     lines.push(verticalBottomLine);
+    // 用于参考竖屏上面的线
     const verticalTopLine = new Polyline(
       [
-        { x: 0, y: DESIGN_HEIGHT - 930 },
+        { x: 0, y: DESIGN_HEIGHT - 900 },
         {
           x: DESIGN_HEIGHT,
-          y: DESIGN_HEIGHT - 930,
+          y: DESIGN_HEIGHT - 900,
         },
       ],
       verticalLineOptions,
@@ -373,16 +374,15 @@ const ImageEditor: React.FC = () => {
     }
 
     // 计算缩放倍数
-    const multiplier = DESIGN_WIDTH / canvas.width;
     const dataURL = canvas.toDataURL({
       format: "png",
       quality: 1,
-      multiplier: multiplier,
+      multiplier: DESIGN_HEIGHT / canvas.height,
     });
 
     // 下载图片
     const link = document.createElement("a");
-    link.download = `职业小人${Date.now()}.png`;
+    link.download = `职业小人贴贴乐${Date.now()}.png`;
     link.href = dataURL;
     link.click();
 
@@ -405,8 +405,8 @@ const ImageEditor: React.FC = () => {
       >
         <canvas
           style={{
-            border: "1px solid #ccc",
-            boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+            border: "1px solid #cccccc",
+            boxShadow: "0 0 5px rgba(0,0,0,0.1)",
           }}
           ref={canvasRef}
         />
@@ -422,6 +422,7 @@ const ImageEditor: React.FC = () => {
       >
         <Flex justify="flex-start" gap="middle" vertical>
           <Select
+            showSearch={false}
             disabled={loading}
             mode="multiple"
             allowClear
@@ -438,11 +439,16 @@ const ImageEditor: React.FC = () => {
             {"竖屏模式"}
           </Checkbox>
           <Button type="primary" onClick={handleExport}>
-            导出图片
+            保存图片
           </Button>
-          <Text type="secondary" italic style={{ fontSize: 12 }}>
-            无偿分享，严禁盗用、无料印刷、私自商用等
-          </Text>
+          <Flex justify="flex-start" vertical>
+            <Text type="secondary" italic style={{ fontSize: 12 }}>
+              绘制 by 不正雀 网页 by Nel
+            </Text>
+            <Text type="secondary" italic style={{ fontSize: 12 }}>
+              无偿分享，严禁盗用、无料印刷、私自商用等
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
     </div>
