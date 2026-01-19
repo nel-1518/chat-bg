@@ -98,7 +98,11 @@ files.forEach((fileName) => {
   // 文件名
   sticker.fileName = fileName;
   // 封面文件名
-  sticker.coverFileName = fileName;
+  if (fileName === "Yan1.png" || fileName === "死刑点名1.png" || fileName === "大河狸1.png") {
+    sticker.coverFileName = "问号.png";
+  } else {
+    sticker.coverFileName = fileName;
+  }
   // 职业名
   sticker.jobName = mainName.slice(0, -1);
   // 职业序号
@@ -126,5 +130,13 @@ const json = JSON.stringify(stickers, null, 2);
 fs.writeFileSync('./jobs_file_name.json', json, {
   encoding: 'utf-8'
 })
+
+// 需要预加载的文件列表
+const preloadFiles = [];
+preloadFiles.push('./delete.png');
+files.forEach((v) => preloadFiles.push(`./jobs/${v}`));
+fs.writeFileSync('./preload_file_name.json', JSON.stringify(preloadFiles, null, 2), {
+  encoding: 'utf-8'
+});
 
 console.log(json);

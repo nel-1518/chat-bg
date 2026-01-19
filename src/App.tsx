@@ -12,8 +12,9 @@ import {
 const { Text } = Typography;
 import { Sticker } from "./interface";
 import jobsJson from "./assets/jobs_file_name.json";
+import preloadJson from "./assets/preload_file_name.json";
 import "./App.css";
-import { addImageToCanvas } from "./CanvasToos";
+import { addImageToCanvas, preloadImages } from "./CanvasToos";
 
 // 预设参数
 const DESIGN_WIDTH = 900;
@@ -69,6 +70,16 @@ const ImageEditor: React.FC = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
 
+    // 预加载图片资源
+    preloadImages(preloadJson)
+      .then(() => {
+        console.log("所有图片加载完成");
+      })
+      .catch((err) => {
+        console.error("图片加载失败:", err);
+      });
+
+    // 初始化 tab 下的职业选项（默认为防护职业）
     const opts = stickers
       .filter((s) => s.className === tabTitleList[0].key)
       .sort((a, b) =>

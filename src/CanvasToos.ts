@@ -1,22 +1,17 @@
 import { Canvas, Control, FabricImage } from "fabric";
 
-export const preloadImages = (urls: string[]): Promise<HTMLImageElement[]> => {
-  const promises = urls.map((url) => {
-    return new Promise<HTMLImageElement>((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(`Failed to load image: ${url}`);
-      img.src = url;
-      // 处理跨域问题（如果图片在不同域名下）
-      img.crossOrigin = 'anonymous';
-    });
-  });
-  return Promise.all(promises);
+export const preloadImages = (imageUrls: string[]): Promise<string[]> => {
+  return Promise.all(
+    imageUrls.map((url) => {
+      return new Promise<string>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(url);
+        img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
+        img.src = url;
+      });
+    })
+  );
 };
-
-export const jobBaseNameToUrl = (baseName: string): string => {
-  return `./jobs/${baseName}.png`;
-}
 
 /**
  * 导入图片到指定位置
