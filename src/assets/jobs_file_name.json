@@ -176,6 +176,22 @@
     "className": "近战职业"
   },
   {
+    "fileName": "武士1.png",
+    "coverFileName": "武士1.png",
+    "jobName": "武士",
+    "jobIndex": 11,
+    "fileIndex": 1,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "武士2.png",
+    "coverFileName": "武士2.png",
+    "jobName": "武士",
+    "jobIndex": 11,
+    "fileIndex": 2,
+    "className": "近战职业"
+  },
+  {
     "fileName": "死刑点名1.png",
     "coverFileName": "问号.png",
     "jobName": "死刑点名",
@@ -246,6 +262,22 @@
     "jobIndex": 16,
     "fileIndex": 2,
     "className": "远程职业"
+  },
+  {
+    "fileName": "蝰蛇剑士1.png",
+    "coverFileName": "蝰蛇剑士1.png",
+    "jobName": "蝰蛇剑士",
+    "jobIndex": 13,
+    "fileIndex": 1,
+    "className": "近战职业"
+  },
+  {
+    "fileName": "蝰蛇剑士2.png",
+    "coverFileName": "蝰蛇剑士2.png",
+    "jobName": "蝰蛇剑士",
+    "jobIndex": 13,
+    "fileIndex": 2,
+    "className": "近战职业"
   },
   {
     "fileName": "贤者1.png",
