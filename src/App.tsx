@@ -7,6 +7,7 @@ import {
   CheckboxChangeEvent,
   Flex,
   Popconfirm,
+  Slider,
   Typography,
 } from "antd";
 const { Text } = Typography;
@@ -66,6 +67,7 @@ const ImageEditor: React.FC = () => {
   const [isShowGrid, setShowGrid] = useState<boolean>(false);
   const [isDarkMode, setDarkMode] = useState<boolean>(false);
   const [gridLines, setGridLines] = useState<Polyline[]>([]);
+  const [opacity, setOpacity] = useState<number>(100);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -226,17 +228,22 @@ const ImageEditor: React.FC = () => {
    * 处理图片点击事件，点击后将图像绘制到 canvas 中
    * @param sticker 点击的对象
    */
-  const handleOnStickerClick = (sticker: Sticker) => {
+  const handleOnStickerClick = async (sticker: Sticker) => {
+    const canvas = fabricCanvas.current;
+    if (!canvas) return;
+
     const y =
       sticker.fileIndex === 2
         ? DESIGN_HEIGHT - 220 - 150
         : DESIGN_HEIGHT - 930 - 150;
-    addImageToCanvas(
-      fabricCanvas.current!,
+    const img = await addImageToCanvas(
+      canvas,
       `./jobs/${sticker.fileName}`,
       isVertical ? DESIGN_WIDTH / 2 : DESIGN_HEIGHT / 2,
       isVertical ? y : DESIGN_HEIGHT / 2,
     );
+    img?.set("opacity", Math.min(1, opacity / 100));
+    canvas.renderAll();
   };
 
   /**
@@ -290,6 +297,19 @@ const ImageEditor: React.FC = () => {
         width: canvas.height,
       });
     }
+    canvas.renderAll();
+  };
+
+  const handleOnChangeComplete = (value: number) => {
+    const canvas = fabricCanvas.current;
+    if (!canvas) return;
+
+    canvas.getObjects().forEach((obj) => {
+      if (obj instanceof FabricImage) {
+        // 对所有图像应用透明度
+        obj.set("opacity", Math.min(1, value / 100));
+      }
+    });
     canvas.renderAll();
   };
 
@@ -362,11 +382,7 @@ const ImageEditor: React.FC = () => {
       </div>
 
       {/* 操作按钮 */}
-      <Flex
-        className="option-container"
-        justify="flex-start"
-        vertical
-      >
+      <Flex className="option-container" justify="flex-start" vertical>
         <Flex justify="flex-start" gap="middle" vertical>
           <Card
             tabList={tabTitleList}
@@ -398,6 +414,16 @@ const ImageEditor: React.FC = () => {
           <Checkbox checked={isVertical} onChange={handleSetVertical}>
             {"竖屏模式"}
           </Checkbox>
+          <Slider
+            step={5}
+            max={100}
+            min={10}
+            value={opacity}
+            tooltip={{ formatter: (v) => `透明度${v}%` }}
+            defaultValue={100}
+            onChangeComplete={handleOnChangeComplete}
+            onChange={(v) => setOpacity(v)}
+          />
           <Popconfirm
             title="是否清空画布"
             description="将删除当前所有内容"
