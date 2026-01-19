@@ -363,11 +363,9 @@ const ImageEditor: React.FC = () => {
 
       {/* 操作按钮 */}
       <Flex
+        className="option-container"
         justify="flex-start"
         vertical
-        style={{
-          width: "500px",
-        }}
       >
         <Flex justify="flex-start" gap="middle" vertical>
           <Card
