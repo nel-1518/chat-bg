@@ -201,7 +201,7 @@ const ImageEditor: React.FC = () => {
 
     canvas.setZoom(scale);
     fabricCanvas.current = canvas;
-    canvas.renderAll();
+    canvas.requestRenderAll();
 
     return () => {
       canvas.dispose();
@@ -258,7 +258,7 @@ const ImageEditor: React.FC = () => {
     gridLines.forEach((v) => {
       v.visible = e.target.checked;
     });
-    canvas.renderAll();
+    canvas.requestRenderAll();
   };
 
   /**
@@ -277,7 +277,7 @@ const ImageEditor: React.FC = () => {
       canvas.backgroundColor = BG_LIGHT;
       canvas.contextContainer.filter = "brightness(1)";
     }
-    canvas.renderAll();
+    canvas.requestRenderAll();
   };
 
   /**
@@ -297,7 +297,7 @@ const ImageEditor: React.FC = () => {
         width: canvas.height,
       });
     }
-    canvas.renderAll();
+    canvas.requestRenderAll();
   };
 
   const handleOnChangeComplete = (value: number) => {
@@ -310,7 +310,7 @@ const ImageEditor: React.FC = () => {
         obj.set("opacity", Math.min(1, value / 100));
       }
     });
-    canvas.renderAll();
+    canvas.requestRenderAll();
   };
 
   /**
@@ -364,7 +364,20 @@ const ImageEditor: React.FC = () => {
   };
 
   return (
-    <div className="container" style={{ width: "100%" }}>
+    <div
+      className="container"
+      style={{ width: "100%" }}
+      onClick={(e) => {
+        const canvas = fabricCanvas.current;
+        if (!canvas) return;
+        // 点击画布外时取消框选状态
+        const canvasWrapper = canvas.getElement().parentElement;
+        if (canvasWrapper && !canvasWrapper.contains(e.target as Node)) {
+          canvas.discardActiveObject();
+          canvas.requestRenderAll();
+        }
+      }}
+    >
       {/* 画布 */}
       <div
         ref={containerRef}
@@ -381,7 +394,7 @@ const ImageEditor: React.FC = () => {
         />
       </div>
 
-      {/* 操作按钮 */}
+      {/* 操作部分 */}
       <Flex className="option-container" justify="flex-start" vertical>
         <Flex justify="flex-start" gap="middle" vertical>
           <Card
@@ -419,7 +432,8 @@ const ImageEditor: React.FC = () => {
             max={100}
             min={10}
             value={opacity}
-            tooltip={{ formatter: (v) => `透明度${v}%` }}
+            tooltip={{ formatter: (v) => `${v}%` }}
+            marks={{ 30: "透明度30%", 60: "透明度60%", 90: "透明度90%" }}
             defaultValue={100}
             onChangeComplete={handleOnChangeComplete}
             onChange={(v) => setOpacity(v)}

@@ -1,5 +1,12 @@
 import { Canvas, Control, FabricImage } from "fabric";
 
+const delElement = document.createElement('img');
+delElement.src = "./delete.png";
+const addElement = document.createElement('img');
+addElement.src = "./add.png";
+const subElement = document.createElement('img');
+subElement.src = "./sub.png";
+
 export const preloadImages = (imageUrls: string[]): Promise<string[]> => {
   return Promise.all(
     imageUrls.map((url) => {
@@ -23,28 +30,75 @@ export const addImageToCanvas = async (
   top: number,
 ): Promise<FabricImage | null> => {
 
+  const size = 25; // 图标大小
+
   try {
-    const imgElement = document.createElement('img');
-    imgElement.src = "./delete.png";
     const img = await FabricImage.fromURL(url, { crossOrigin: 'anonymous' }, {
       controls: {
         ...FabricImage.createControls().controls,
-        mySpecialControl: new Control({
+        myOpacitySubControl: new Control({
           x: 0,
           y: 0.5,
           cursorStyle: "pointer",
-          sizeX: 25,
-          sizeY: 25,
+          sizeX: size,
+          sizeY: size,
+          offsetX: -50,
           mouseUpHandler: (e, trans) => {
+            // 如果操作中进行了位移或变形，不进行处理，防止手机端误触
+            if (trans.actionPerformed) {
+              return false;
+            }
+            trans.target.set("opacity", Math.max(0.1, trans.target.opacity - 0.15))
+            canvas.requestRenderAll();
+            return true;
+          },
+          render: (ctx, left, top) => {
+            ctx.save();
+            ctx.translate(left, top);
+            ctx.drawImage(subElement, -size / 2, -size / 2, size, size);
+            ctx.restore();
+          }
+        }),
+        myOpacityAddControl: new Control({
+          x: 0,
+          y: 0.5,
+          cursorStyle: "pointer",
+          sizeX: size,
+          sizeY: size,
+          mouseUpHandler: (e, trans) => {
+            if (trans.actionPerformed) {
+              return false;
+            }
+            trans.target.set("opacity", Math.min(1, trans.target.opacity + 0.15))
+            canvas.requestRenderAll();
+            return true;
+          },
+          render: (ctx, left, top) => {
+            ctx.save();
+            ctx.translate(left, top);
+            ctx.drawImage(addElement, -size / 2, -size / 2, size, size);
+            ctx.restore();
+          }
+        }),
+        myDeleteControl: new Control({
+          x: 0,
+          y: 0.5,
+          cursorStyle: "pointer",
+          sizeX: size,
+          sizeY: size,
+          offsetX: 50,
+          mouseUpHandler: (e, trans) => {
+            if (trans.actionPerformed) {
+              return false;
+            }
             canvas.remove(trans.target);
             canvas.requestRenderAll();
             return true;
           },
           render: (ctx, left, top) => {
-            const size = 25; // 图标大小
             ctx.save();
             ctx.translate(left, top);
-            ctx.drawImage(imgElement, -size / 2, -size / 2, size, size);
+            ctx.drawImage(delElement, -size / 2, -size / 2, size, size);
             ctx.restore();
           }
         }),

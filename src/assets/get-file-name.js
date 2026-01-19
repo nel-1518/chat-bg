@@ -133,7 +133,7 @@ fs.writeFileSync('./jobs_file_name.json', json, {
 
 // 需要预加载的文件列表
 const preloadFiles = [];
-preloadFiles.push('./delete.png');
+preloadFiles.push('./delete.png', "./add.png", "./sub.png");
 files.forEach((v) => preloadFiles.push(`./jobs/${v}`));
 fs.writeFileSync('./preload_file_name.json', JSON.stringify(preloadFiles, null, 2), {
   encoding: 'utf-8'
