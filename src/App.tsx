@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Canvas, FabricImage, Polyline } from "fabric";
 import {
+  Alert,
   Button,
   Card,
   Checkbox,
@@ -54,6 +55,7 @@ const tabTitleList = [
 ];
 
 const ImageEditor: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   // 画布相关引用
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,9 +78,11 @@ const ImageEditor: React.FC = () => {
     preloadImages(preloadJson)
       .then(() => {
         console.log("所有图片加载完成");
+        setLoading(false);
       })
       .catch((err) => {
         console.error("图片加载失败:", err);
+        setLoading(false);
       });
 
     // 初始化 tab 下的职业选项（默认为防护职业）
@@ -393,10 +397,18 @@ const ImageEditor: React.FC = () => {
           ref={canvasRef}
         />
       </div>
-
       {/* 操作部分 */}
       <Flex className="option-container" justify="flex-start" vertical>
         <Flex justify="flex-start" gap="middle" vertical>
+          {loading ? (
+            <Alert
+              title="正在下载，请等待列表中的图片完整显示后使用。"
+              type="info"
+              closable={{ closeIcon: true, "aria-label": "close" }}
+            />
+          ) : (
+            <></>
+          )}
           <Card
             tabList={tabTitleList}
             activeTabKey={activeTabKey}
