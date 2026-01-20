@@ -430,13 +430,25 @@ const ImageEditor: React.FC = () => {
               />
             ))}
           </Card>
-          <Checkbox checked={isShowGrid} onChange={handleSetGrid}>
+          <Checkbox
+            checked={isShowGrid}
+            onChange={handleSetGrid}
+            style={{ width: "fit-content", userSelect: "none" }}
+          >
             {"显示参考网格"}
           </Checkbox>
-          <Checkbox checked={isDarkMode} onChange={handleSetDarkMode}>
+          <Checkbox
+            checked={isDarkMode}
+            onChange={handleSetDarkMode}
+            style={{ width: "fit-content", userSelect: "none" }}
+          >
             {"暗色模式"}
           </Checkbox>
-          <Checkbox checked={isVertical} onChange={handleSetVertical}>
+          <Checkbox
+            checked={isVertical}
+            onChange={handleSetVertical}
+            style={{ width: "fit-content", userSelect: "none" }}
+          >
             {"竖屏模式"}
           </Checkbox>
           <Slider
